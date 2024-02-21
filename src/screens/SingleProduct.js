@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
 import { Link ,useParams} from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
-import products from "../data/Products";
+
+
 
 const SingleProduct = () => {
-  const { id } = useParams(); // Utilisez useParams() pour accéder aux paramètres de la route
-  const product = products.find((p) => p._id === id); // Utilisez directement id au lieu de match.params.id
+  const [products , setProducts] = useState({})
+  const { id } = useParams();
+ 
+  useEffect(()=>{
+    const fetchProducts = async()=>{
+      try{
+        
+        const result = await fetch(`http://localhost:8000/api/products/${id}`)
+        const data = await result.json()
+        setProducts(data)
+      }catch{
+          console.log('erreur')
+      }
+    }
+    fetchProducts()
+  },)
+  
   return (
     <>
       <Header />
@@ -15,49 +31,49 @@ const SingleProduct = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="single-image">
-              <img src={product.image} alt={product.name} />
+              <img src={products.image} alt={products.name} />
             </div>
           </div>
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">{product.name}</div>
+                <div className="product-name">{products.name}</div>
               </div>
-              <p>{product.description}</p>
+              <p>{products.description}</p>
 
               <div className="product-count col-lg-7 ">
                 <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Price</h6>
-                  <span>${product.price}</span>
+                  <h6>Prix</h6>
+                  <span>Ar{products.price}</span>
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Status</h6>
-                  {product.countInStock > 0 ? (
-                    <span>In Stock</span>
+                  {products.countInStock > 0 ? (
+                    <span>En stock</span>
                   ) : (
-                    <span>unavailable</span>
+                    <span>Invalide</span>
                   )}
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Reviews</h6>
+                  <h6>Stars</h6>
                   <Rating
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
+                    value={products.rating}
+                    text={`${products.numReviews} reviews`}
                   />
                 </div>
-                {product.countInStock > 0 ? (
+                {products.countInStock > 0 ? (
                   <>
                     <div className="flex-box d-flex justify-content-between align-items-center">
-                      <h6>Quantity</h6>
+                      <h6>Quantite</h6>
                       <select>
-                        {[...Array(product.countInStock).keys()].map((x) => (
+                        {[...Array(products.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
                           </option>
                         ))}
                       </select>
                     </div>
-                    <button className="round-black-btn">Add To Cart</button>
+                    <button className="round-black-btn">Ajoutez Au Panier</button>
                   </>
                 ) : null}
               </div>
@@ -68,8 +84,8 @@ const SingleProduct = () => {
         {/* RATING */}
         <div className="row my-5">
           <div className="col-md-6">
-            <h6 className="mb-3">REVIEWS</h6>
-            <Message variant={"alert-info mt-3"}>No Reviews</Message>
+            <h6 className="mb-3">Commentaire</h6>
+            <Message variant={"alert-info mt-3"}>Non commentaire</Message>
             <div className="mb-5 mb-md-3 bg-light p-3 shadow-sm rounded">
               <strong>Admin Doe</strong>
               <Rating />
@@ -88,7 +104,7 @@ const SingleProduct = () => {
 
             <form>
               <div className="my-4">
-                <strong>Rating</strong>
+                <strong>Noter</strong>
                 <select className="col-12 bg-light p-3 mt-2 border-0 rounded">
                   <option value="">Select...</option>
                   <option value="1">1 - Poor</option>
@@ -99,7 +115,7 @@ const SingleProduct = () => {
                 </select>
               </div>
               <div className="my-4">
-                <strong>Comment</strong>
+                <strong>commentaire</strong>
                 <textarea
                   row="3"
                   className="col-12 bg-light p-3 mt-2 border-0 rounded"
@@ -107,17 +123,17 @@ const SingleProduct = () => {
               </div>
               <div className="my-3">
                 <button className="col-12 bg-black border-0 p-3 rounded text-white">
-                  SUBMIT
+                  VALIDER
                 </button>
               </div>
             </form>
             <div className="my-3">
               <Message variant={"alert-warning"}>
-                Please{" "}
+                Desolez {" "}
                 <Link to="/login">
                   " <strong>Login</strong> "
                 </Link>{" "}
-                to write a review{" "}
+                pour commenter{" "}
               </Message>
             </div>
           </div>

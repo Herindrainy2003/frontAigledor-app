@@ -1,0 +1,58 @@
+{
+    "short_name": "Aigle D'or",
+    "name": "Aigle d'or",
+    "icons": [
+      {
+        "src": "./images/logo22.png",
+        "type": "image/ico+xml",
+        "sizes": "512x512"
+      },
+      {
+        "src": "./images/logo22.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "./images/logo22.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "id": "/?source=pwa",
+    "start_url": "/?source=pwa",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6",
+    "shortcuts": [
+      {
+        "name": "Aigle d'or",
+        "short_name": "Aigle D'or",
+        "description": "Aigle d'or Magadagascra",
+        "url": "/today?source=pwa",
+        "icons": [{ "src": "./images/logo22.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "How's weather tomorrow?",
+        "short_name": "Tomorrow",
+        "description": "View weather information for tomorrow",
+        "url": "/tomorrow?source=pwa",
+        "icons": [{ "src": "./images/logo22.png", "sizes": "192x192" }]
+      }
+    ],
+    "description": "Weather forecast information",
+    "screenshots": [
+      {
+        "src": "./images/logo22.png",
+        "type": "image/png",
+        "sizes": "540x720",
+        "form_factor": "narrow"
+      },
+      {
+        "src": "./images/logo22.png",
+        "type": "image/jpg",
+        "sizes": "720x540",
+        "form_factor": "wide"
+      }
+    ]
+  }
