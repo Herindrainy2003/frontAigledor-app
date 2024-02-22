@@ -1,54 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
 import { Link ,useParams} from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
-
+import { useDispatch, useSelector } from "react-redux";
+import { listProductDetails } from "../Redux/Actions/ProductActions";
+import Loading from './../components/LoadingError/Loading';
 
 
 const SingleProduct = () => {
-  const [products , setProducts] = useState({})
-  const { id } = useParams();
+
+  const productId = useParams();
+  const id = productId.id
+  const dispatch = useDispatch();
  
+  const productDetails = useSelector((state) => state.productDetails);
+  const {loading , error , product } = productDetails;
+  console.log(productDetails)
+
   useEffect(()=>{
-    const fetchProducts = async()=>{
-      try{
-        
-        const result = await fetch(`http://localhost:8000/api/products/${id}`)
-        const data = await result.json()
-        setProducts(data)
-      }catch{
-          console.log('erreur')
-      }
-    }
-    fetchProducts()
-  },)
+    dispatch(listProductDetails(id));
+   
+  }, [dispatch, id])
   
   return (
     <>
       <Header />
       <div className="container single-product">
+      {loading ? (
+          <Loading />
+        ) : error ? (
+          <Message variant="alert-danger">{error}</Message>
+        ) : (
+          <>
         <div className="row">
           <div className="col-md-6">
             <div className="single-image">
-              <img src={products.image} alt={products.name} />
+              <img src={product.image} alt={product.name} />
             </div>
           </div>
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">{products.name}</div>
+                <div className="product-name">{product.name}</div>
               </div>
-              <p>{products.description}</p>
+              <p>{product.description}</p>
 
               <div className="product-count col-lg-7 ">
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Prix</h6>
-                  <span>Ar{products.price}</span>
+                  <span>Ar{product.price}</span>
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Status</h6>
-                  {products.countInStock > 0 ? (
+                  {product.countInStock > 0 ? (
                     <span>En stock</span>
                   ) : (
                     <span>Invalide</span>
@@ -57,16 +62,16 @@ const SingleProduct = () => {
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Stars</h6>
                   <Rating
-                    value={products.rating}
-                    text={`${products.numReviews} reviews`}
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
                   />
                 </div>
-                {products.countInStock > 0 ? (
+                {product.countInStock > 0 ? (
                   <>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Quantite</h6>
                       <select>
-                        {[...Array(products.countInStock).keys()].map((x) => (
+                        {[...Array(product.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
                           </option>
@@ -138,6 +143,8 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
     </>
   );
