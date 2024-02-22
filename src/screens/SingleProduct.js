@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState } from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
-import { Link ,useParams} from "react-router-dom";
+import { Link ,useParams ,useNavigate} from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../Redux/Actions/ProductActions";
 import Loading from './../components/LoadingError/Loading';
 
 
-const SingleProduct = () => {
-
+const SingleProduct = ({history}) => {
+  const navigate = useNavigate();
+  const [qty, setQty] = useState(0);
   const productId = useParams();
+ 
   const id = productId.id
   const dispatch = useDispatch();
  
@@ -22,6 +24,11 @@ const SingleProduct = () => {
     dispatch(listProductDetails(id));
    
   }, [dispatch, id])
+
+  const AddToCart = (e) => {
+    e.preventDefault();
+    navigate(`/cart/${id}?qty=${qty}`);
+  };
   
   return (
     <>
@@ -78,7 +85,7 @@ const SingleProduct = () => {
                         ))}
                       </select>
                     </div>
-                    <button className="round-black-btn">Ajoutez Au Panier</button>
+                    <button onClick={AddToCart} className="round-black-btn">Ajoutez Au Panier</button>
                   </>
                 ) : null}
               </div>
@@ -151,3 +158,4 @@ const SingleProduct = () => {
 };
 
 export default SingleProduct;
+

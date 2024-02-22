@@ -1,9 +1,14 @@
 import React from "react";
 import Header from "./../components/Header";
-import { Link } from "react-router-dom";
+import { Link ,useParams , useLocation } from "react-router-dom";
 
-const CartScreen = () => {
+const CartScreen = ({location}) => {
   window.scrollTo(0, 0);
+  const id = useParams()
+  const productId = id.id 
+  const search = window.location.search;
+  const qty = new URLSearchParams(search).get('qty')
+console.log(qty)
   return (
     <>
       <Header />
