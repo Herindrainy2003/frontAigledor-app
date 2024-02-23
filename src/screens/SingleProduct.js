@@ -10,7 +10,7 @@ import Loading from './../components/LoadingError/Loading';
 
 const SingleProduct = ({history}) => {
   const navigate = useNavigate();
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const productId = useParams();
  
   const id = productId.id
@@ -27,6 +27,7 @@ const SingleProduct = ({history}) => {
 
   const AddToCart = (e) => {
     e.preventDefault();
+    setQty()
     navigate(`/cart/${id}?qty=${qty}`);
   };
   
@@ -77,13 +78,18 @@ const SingleProduct = ({history}) => {
                   <>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Quantite</h6>
-                      <select>
-                        {[...Array(product.countInStock).keys()].map((x) => (
-                          <option key={x + 1} value={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </select>
+                      <select
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                          >
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </select>
                     </div>
                     <button onClick={AddToCart} className="round-black-btn">Ajoutez Au Panier</button>
                   </>
