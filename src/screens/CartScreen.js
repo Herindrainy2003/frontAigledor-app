@@ -28,7 +28,7 @@ const CartScreen = () => {
   
   const checkOutHandler = () => {
    
-  navigate(`/login?=shipping`);
+  navigate(`/shipping`);
   };
 
   const removeFromCartHandle = (id) => {
