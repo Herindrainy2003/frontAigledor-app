@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "./../components/Header";
 import { PayPalButton } from "react-paypal-button-v2";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails, payOrder } from "../Redux/Actions/OrderActions";
-import { useParams } from "react-router-dom";
 import Loading from "./../components/LoadingError/Loading";
 import Message from "./../components/LoadingError/Error";
 import moment from "moment";
@@ -60,6 +59,7 @@ const OrderScreen = () => {
     dispatch(payOrder(orderId, paymentResult));
   };
 
+
   return (
     <>
       <Header />
@@ -80,7 +80,7 @@ const OrderScreen = () => {
                   </div>
                   <div className="col-md-8 center">
                     <h5>
-                      <strong>Customer</strong>
+                      <strong>Client</strong>
                     </h5>
                     <p>{order.user.name}</p>
                     <p>
@@ -108,13 +108,13 @@ const OrderScreen = () => {
                     {order.isPaid ? (
                       <div className="bg-info p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Paid on {moment(order.paidAt).calendar()}
+                          Payer le {moment(order.paidAt).calendar()}
                         </p>
                       </div>
                     ) : (
                       <div className="bg-danger p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Not Paid
+                          Pas payer
                         </p>
                       </div>
                     )}
@@ -131,10 +131,10 @@ const OrderScreen = () => {
                   </div>
                   <div className="col-md-8 center">
                     <h5>
-                      <strong>Deliver to</strong>
+                      <strong>Deliver a</strong>
                     </h5>
                     <p>
-                      Address: {order.shippingAddress.city},{" "}
+                      Addresse: {order.shippingAddress.city},{" "}
                       {order.shippingAddress.address},{" "}
                       {order.shippingAddress.postalCode}
                     </p>
@@ -147,7 +147,7 @@ const OrderScreen = () => {
                     ) : (
                       <div className="bg-danger p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Not Delivered
+                         pas delivrer
                         </p>
                       </div>
                     )}
@@ -180,7 +180,7 @@ const OrderScreen = () => {
                         </div>
                         <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                           <h4>SUBTOTAL</h4>
-                          <h6>${item.qty * item.price}</h6>
+                          <h6>Ariary{item.qty * item.price}</h6>
                         </div>
                       </div>
                     ))}
@@ -195,25 +195,20 @@ const OrderScreen = () => {
                       <td>
                         <strong>Products</strong>
                       </td>
-                      <td>${order.itemsPrice}</td>
+                      <td>Ar{order.itemsPrice}</td>
                     </tr>
                     <tr>
                       <td>
-                        <strong>Shipping</strong>
+                        <strong>Frais livraison</strong>
                       </td>
                       <td>${order.shippingPrice}</td>
                     </tr>
-                    <tr>
-                      <td>
-                        <strong>Tax</strong>
-                      </td>
-                      <td>${order.taxPrice}</td>
-                    </tr>
+                    
                     <tr>
                       <td>
                         <strong>Total</strong>
                       </td>
-                      <td>${order.totalPrice}</td>
+                      <td>${order.totalPrice / 4000}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -223,8 +218,8 @@ const OrderScreen = () => {
                     {!sdkReady ? (
                       <Loading />
                     ) : (
-                      <PayPalButton
-                        amount={order.totalPrice}
+                      <PayPalButton 
+                        amount={(order.totalPrice) }
                         onSuccess={successPaymentHandler}
                       />
                     )}

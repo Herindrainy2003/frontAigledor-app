@@ -20,8 +20,15 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomeScreen />} exact />
+        <Route path="/search/:keyword" component={HomeScreen} exact />
         <Route path="/products/:id" element={<SingleProduct/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/page/:pagenumber" component={HomeScreen} exact />
+        <Route
+          path="/search/:keyword/page/:pageNumber"
+          component={HomeScreen}
+          exact
+        />
         <Route path="/register" element={<Register/>} />
         <Route path="/profile" element={<ProfileScreen/>} />
         <Route path="/cart/:id?" element={<CartScreen/>} />

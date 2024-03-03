@@ -25,8 +25,7 @@ const PlaceOrderScreen = () => {
   cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
   cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
   cart.totalPrice = (
-    Number(cart.itemsPrice) +
-    Number(cart.shippingPrice) 
+   (Number(cart.itemsPrice) + Number(cart.shippingPrice) / 4000) 
 
   ).toFixed(2);
 
@@ -136,7 +135,7 @@ const PlaceOrderScreen = () => {
                     </div>
                     <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                       <h4>Sous-total</h4>
-                      <h6>${item.qty * item.price}</h6>
+                      <h6>Ar{item.qty * item.price}</h6>
                     </div>
                   </div>
                 ))}
@@ -151,20 +150,20 @@ const PlaceOrderScreen = () => {
                   <td>
                     <strong>Produits</strong>
                   </td>
-                  <td>${cart.itemsPrice}</td>
+                  <td>Ar{cart.itemsPrice}</td>
                 </tr>
                 <tr>
                   <td>
-                    <strong>Shipping</strong>
+                    <strong>Livraison</strong>
                   </td>
-                  <td>${cart.shippingPrice}</td>
+                  <td>Ar{cart.shippingPrice}</td>
                 </tr>
       
                 <tr>
                   <td>
-                    <strong>Total</strong>
+                    <strong>Totale</strong>
                   </td>
-                  <td>${cart.totalPrice}</td>
+                  <td>Ar{cart.totalPrice}</td>
                 </tr>
               </tbody>
             </table>
