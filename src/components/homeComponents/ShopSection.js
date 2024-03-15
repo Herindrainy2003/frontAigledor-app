@@ -9,7 +9,7 @@ import Message from "../LoadingError/Error";
 
 const ShopSection = (props) => {
   const { keyword, pagenumber } = props;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
@@ -51,10 +51,10 @@ const ShopSection = (props) => {
                               </Link>
                             </p>
 
-                            <Rating
+                            {/* <Rating
                               value={product.rating}
                               text={`${product.numReviews} reviews`}
-                            />
+                            /> */}
                             <h3>Ar{product.price}</h3>
                           </div>
                         </div>

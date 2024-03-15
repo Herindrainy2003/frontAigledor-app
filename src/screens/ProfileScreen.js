@@ -64,7 +64,7 @@ const ProfileScreen = () => {
                   >
                   Options du Profile
                   </button>
-                  <button
+                  {/* <button
                     class="nav-link d-flex justify-content-between"
                     id="v-pills-profile-tab"
                     data-bs-toggle="pill"
@@ -76,7 +76,7 @@ const ProfileScreen = () => {
                   >
                     Orders List
                     <span className="badge2">{orders ? orders.length : 0}</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

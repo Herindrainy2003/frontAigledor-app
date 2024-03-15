@@ -22,10 +22,9 @@ const PlaceOrderScreen = () => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
-  cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
+  cart.shippingPrice = 10000;
   cart.totalPrice = (
-   (Number(cart.itemsPrice) + Number(cart.shippingPrice) / 4000) 
+   (Number(cart.itemsPrice) + Number(cart.shippingPrice)) 
 
   ).toFixed(2);
 
@@ -40,6 +39,8 @@ const PlaceOrderScreen = () => {
   }, [history, dispatch, success, order]);
 
   const placeOrderHandler = () => {
+    const priceDollar = cart.totalPrice / 4000
+    console.log(priceDollar)
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -48,7 +49,7 @@ const PlaceOrderScreen = () => {
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
+        totalPrice: priceDollar,
       })
     );
   };
@@ -169,7 +170,7 @@ const PlaceOrderScreen = () => {
             </table>
             {cart.cartItems.length === 0 ? null : (
               <button type="submit" onClick={placeOrderHandler}>
-                PLACE ORDER
+                VALIDER
               </button>
             )}
             {error && (

@@ -191,7 +191,7 @@ const OrderScreen = () => {
               <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
                 <table className="table table-bordered">
                   <tbody>
-                    <tr>
+                    {/* <tr>
                       <td>
                         <strong>Products</strong>
                       </td>
@@ -202,13 +202,13 @@ const OrderScreen = () => {
                         <strong>Frais livraison</strong>
                       </td>
                       <td>${order.shippingPrice}</td>
-                    </tr>
+                    </tr> */}
                     
                     <tr>
                       <td>
                         <strong>Total</strong>
                       </td>
-                      <td>${order.totalPrice / 4000}</td>
+                      <td>${order.totalPrice}</td>
                     </tr>
                   </tbody>
                 </table>

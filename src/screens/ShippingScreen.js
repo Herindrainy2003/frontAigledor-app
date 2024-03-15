@@ -28,7 +28,7 @@ const ShippingScreen = () => {
           className="Login col-md-8 col-lg-4 col-11"
           onSubmit={submitHandler}
         >
-          <h6>DELIVERY ADDRESS</h6>
+          <h6>ADRESSE DE LIVRAISON</h6>
           <input
             type="text"
             placeholder="Enter address"
@@ -57,7 +57,7 @@ const ShippingScreen = () => {
             required
             onChange={(e) => setCountry(e.target.value)}
           />
-          <button type="submit">Continue</button>
+          <button type="submit">Continuer</button>
         </form>
       </div>
     </>

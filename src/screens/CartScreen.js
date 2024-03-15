@@ -43,7 +43,7 @@ const CartScreen = () => {
 
       {cartItems.length === 0 ? (
           <div className=" alert alert-info text-center mt-3">
-            Your cart is empty
+            Votre panier est vide
             <Link
               className="btn btn-success mx-5 px-5 py-3"
               to="/"
@@ -51,7 +51,7 @@ const CartScreen = () => {
                 fontSize: "12px",
               }}
             >
-              SHOPPING NOW
+              Votre panier
             </Link>
           </div>
         ) : (
@@ -110,11 +110,11 @@ const CartScreen = () => {
         
           <div className="cart-buttons d-flex align-items-center row">
               <Link to="/" className="col-md-6 ">
-                <button>Continue To Shopping</button>
+                <button>Continuer l'achat</button>
               </Link>
               {total > 0 && (
                 <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                  <button onClick={checkOutHandler}>Checkout</button>
+                  <button onClick={checkOutHandler}>Acheter</button>
                 </div>
               )}
             </div>

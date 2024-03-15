@@ -62,17 +62,17 @@ const SingleProduct = ({history}) => {
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Status</h6>
                   {product.countInStock > 0 ? (
-                    <span>En stock</span>
+                    <span> Valide </span>
                   ) : (
                     <span>Invalide</span>
                   )}
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Stars</h6>
-                  <Rating
+                  {/* <Rating
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
-                  />
+                  /> */}
                 </div>
                 {product.countInStock > 0 ? (
                   <>
@@ -100,7 +100,7 @@ const SingleProduct = ({history}) => {
         </div>
 
         {/* RATING */}
-        <div className="row my-5">
+        {/* <div className="row my-5">
           <div className="col-md-6">
             <h6 className="mb-3">Commentaire</h6>
             <Message variant={"alert-info mt-3"}>Non commentaire</Message>
@@ -155,7 +155,7 @@ const SingleProduct = ({history}) => {
               </Message>
             </div>
           </div>
-        </div>
+        </div> */}
         </>
         )}
       </div>
